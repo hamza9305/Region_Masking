@@ -2,20 +2,18 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import numpy as np
 
-# Read in the image and print some stats
-image = mpimg.imread(r'F:\Self_driving_cars\ImageForColorSelection/test.jpg')
-print('This image is: ', type(image),
-         'with dimensions:', image.shape)
+indir = 'Enter directory to image'
+outdir = 'Enter directory to output image'
 
-# Pull out the x and y sizes and make a copy of the image
+# Read in the image and print some stats
+image = mpimg.imread(indir)
+
+# Make a copy of the image
 ysize = image.shape[0]
 xsize = image.shape[1]
 region_select = np.copy(image)
 
 # Define a triangle region of interest
-# Keep in mind the origin (x=0, y=0) is in the upper left in image processing
-# Note: if you run this code, you'll find these are not sensible values!!
-# But you'll get a chance to play with them soon in a quiz
 left_bottom = [0, 539]
 right_bottom = [900, 539]
 apex = [475, 320]
@@ -38,6 +36,5 @@ region_select[region_thresholds] = [255, 0, 0]
 # Display the image
 plt.imshow(region_select)
 
-# uncomment if plot does not display
 plt.show()
-mpimg.imsave(r"F:\GitHub_Live_Projects\Region_Masking_for_Lane\resource/test-after.png", region_select)
+mpimg.imsave(outdir, region_select)
